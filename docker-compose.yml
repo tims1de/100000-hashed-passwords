@@ -1,0 +1,39 @@
+services:
+  db:
+    image: postgres:15
+    container_name: api_db
+    env_file:
+      - backend/.env-non-dev
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+
+  back_api:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    image: back_api_image
+    container_name: backend_api_container
+    env_file:
+      - ./backend/.env-non-dev
+    depends_on:
+      - db
+    command: ["/app/docker/app.sh"]
+    ports:
+      - 8000:8000
+
+  front_api:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    image: front_api_image
+    container_name: frontend_api_container
+    depends_on:
+      - back_api
+    ports:
+      - 5173:5173
+
+volumes:
+  postgres_data:
+

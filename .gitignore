@@ -1,0 +1,9 @@
+.env
+.env-non-dev
+
+# IDE и редакторы
+.idea/
+.vscode/
+
+# Зависимости
+node_modules/
