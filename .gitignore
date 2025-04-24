@@ -7,8 +7,6 @@
 
 __pycache__/
 *.py[cod]
-*.pyo
-*.pyd
-*.so
+*$py.class
 # Зависимости
 node_modules/
